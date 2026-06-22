@@ -1,0 +1,356 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta name="description" content="faydi.dev - Développeur web freelance. Je transforme vos idées en sites web professionnels qui travaillent pour vous 24h/24.">
+    <meta name="keywords" content="développeur web, site vitrine, boutique en ligne, freelance, faydi.dev, création site web">
+    <meta name="author" content="faydi.dev">
+    <meta property="og:title" content="faydi.dev - Développeur Web Freelance">
+    <meta property="og:description" content="Vous avez une idée, je la transforme en site qui travaille pour vous 24h/24.">
+    <meta property="og:type" content="website">
+    <title>faydi.dev - Développeur Web Freelance</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+
+    <!-- Google Fonts : Playfair Display (titres) + Inter (corps) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- ============================================================
+         NAVIGATION DOTS — barre verticale à droite de l'écran
+         ============================================================ -->
+    <nav class="nav-dots" id="nav-dots" aria-label="Navigation sections">
+        <a href="#hero"     class="nav-dot active" data-section="hero"     title="Accueil"     data-i18n-title="nav.hero"></a>
+        <a href="#services" class="nav-dot"        data-section="services" title="Services"     data-i18n-title="nav.services"></a>
+        <a href="#projects" class="nav-dot"        data-section="projects" title="Projets"      data-i18n-title="nav.projects"></a>
+        <a href="#why"      class="nav-dot"        data-section="why"      title="Pourquoi moi" data-i18n-title="nav.why"></a>
+        <a href="#contact"  class="nav-dot"        data-section="contact"  title="Contact"       data-i18n-title="nav.contact"></a>
+    </nav>
+
+    <!-- ============================================================
+         SECTION 01 — HERO
+         ============================================================ -->
+    <section id="hero" class="section section-hero">
+
+        <!-- En-tête fixe : logo + réseaux sociaux + langue -->
+        <header class="hero-header">
+            <span class="site-logo">faydi.dev</span>
+            <div class="header-right">
+                <div class="social-links">
+                    <!-- GitHub -->
+                    <a href="https://github.com/FAYDI-DEV" target="_blank" rel="noopener noreferrer"
+                       class="social-link" aria-label="GitHub">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/>
+                        </svg>
+                    </a>
+                    <!-- Instagram -->
+                    <a href="https://www.instagram.com/faydi_dev/" target="_blank" rel="noopener noreferrer"
+                       class="social-link" aria-label="Instagram">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/>
+                        </svg>
+                    </a>
+                    <!-- LinkedIn -->
+                    <a href="https://www.linkedin.com/in/faydi-alili-a55a902a4/" target="_blank" rel="noopener noreferrer"
+                       class="social-link" aria-label="LinkedIn">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                        </svg>
+                    </a>
+                </div>
+                <!-- Sélecteur de langue -->
+                <div class="lang-switch" id="lang-switch" role="group" aria-label="Choix de la langue">
+                    <button type="button" class="lang-btn active" data-lang="fr" aria-label="Français">FR</button>
+                    <span class="lang-sep" aria-hidden="true">|</span>
+                    <button type="button" class="lang-btn" data-lang="en" aria-label="English">EN</button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Label vertical gauche -->
+        <span class="section-label-vertical" aria-hidden="true" data-i18n="hero.label">Présentation</span>
+
+        <!-- Numéro fantôme en arrière-plan -->
+        <span class="section-number-ghost" aria-hidden="true">01</span>
+
+        <!-- Contenu principal du hero -->
+        <div class="hero-content">
+            <h1 class="hero-title" data-i18n="hero.title">Bonjour</h1>
+            <p class="hero-subtitle" data-i18n-html="hero.subtitle">
+                Vous avez une idée,<br>
+                je la transforme en site<br>
+                qui travaille pour vous <span class="accent">24h/24</span>
+            </p>
+            <a href="#contact" class="cta-btn">
+                <span data-i18n="hero.cta">Démarrons votre projet</span>
+            </a>
+        </div>
+
+        <!-- ============================================================
+             PHOTO HERO — style Morozov : pleine hauteur, côté droit
+
+             POUR AJOUTER VOTRE PHOTO :
+             1. Placez votre fichier photo dans le même dossier (ex: photo.jpg)
+             2. Dans style.css, repérez le commentaire "REMPLACER PHOTO"
+                et modifiez background-image: url('photo.jpg')
+             OR : décommentez la balise <img> ci-dessous et supprimez .photo-placeholder
+             ============================================================ -->
+        <div id="hero-photo" class="hero-photo" aria-hidden="true">
+            <!-- Fondu gauche + bas pour se fondre dans le fond noir -->
+            <div class="hero-photo-overlay"></div>
+
+            <img src="hero.png" alt="faydi.dev - Développeur web freelance">
+        </div>
+
+    </section>
+
+    <!-- ============================================================
+         SECTION 02 — SERVICES
+         ============================================================ -->
+    <section id="services" class="section section-services fade-in-section">
+
+        <span class="section-label-vertical" aria-hidden="true" data-i18n="services.label">Services</span>
+        <span class="section-number-ghost" aria-hidden="true">02</span>
+
+        <div class="section-inner">
+            <div class="section-header">
+                <h2 class="section-title" data-i18n-html="services.title">Mes <em>Services</em></h2>
+            </div>
+
+            <div class="services-grid">
+
+                <article class="service-card fade-in-item">
+                    <div class="service-icon" aria-hidden="true">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="2" y="3" width="20" height="14" rx="2"/>
+                            <line x1="8" y1="21" x2="16" y2="21"/>
+                            <line x1="12" y1="17" x2="12" y2="21"/>
+                        </svg>
+                    </div>
+                    <h3 class="service-title" data-i18n="services.showcase.title">Site vitrine</h3>
+                    <p class="service-desc" data-i18n="services.showcase.desc">Un site élégant pour présenter votre entreprise, vos services et convaincre vos visiteurs de vous contacter.</p>
+                </article>
+
+                <article class="service-card fade-in-item">
+                    <div class="service-icon" aria-hidden="true">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
+                            <line x1="3" y1="6" x2="21" y2="6"/>
+                            <path d="M16 10a4 4 0 0 1-8 0"/>
+                        </svg>
+                    </div>
+                    <h3 class="service-title" data-i18n="services.shop.title">Boutique en ligne</h3>
+                    <p class="service-desc" data-i18n="services.shop.desc">Une boutique e-commerce clé en main pour vendre vos produits 24h/24 et encaisser des commandes pendant que vous dormez.</p>
+                </article>
+
+                <article class="service-card fade-in-item">
+                    <div class="service-icon" aria-hidden="true">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="16 18 22 12 16 6"/>
+                            <polyline points="8 6 2 12 8 18"/>
+                        </svg>
+                    </div>
+                    <h3 class="service-title" data-i18n="services.app.title">Application web sur mesure</h3>
+                    <p class="service-desc" data-i18n="services.app.desc">Un outil numérique entièrement personnalisé pour automatiser votre business et gagner du temps au quotidien.</p>
+                </article>
+
+                <article class="service-card fade-in-item">
+                    <div class="service-icon" aria-hidden="true">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                            <path d="M2 17l10 5 10-5"/>
+                            <path d="M2 12l10 5 10-5"/>
+                        </svg>
+                    </div>
+                    <h3 class="service-title" data-i18n="services.design.title">Design unique</h3>
+                    <p class="service-desc" data-i18n="services.design.desc">Un design qui vous ressemble et qui vous distingue de la concurrence, pour une image professionnelle sublimée.</p>
+                </article>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 03 — PROJETS
+
+         POUR REMPLACER UN PROJET :
+         1. Remplacez "Nom du projet XX" par le vrai nom
+         2. Remplacez la description
+         3. Mettez l'URL réelle dans href="#"
+         4. Pour la photo : remplacez .project-img-placeholder par :
+            <img src="screenshot-projet.jpg" alt="Nom du projet">
+         ============================================================ -->
+    <section id="projects" class="section section-projects fade-in-section">
+
+        <span class="section-label-vertical" aria-hidden="true" data-i18n="projects.label">Projets</span>
+        <span class="section-number-ghost" aria-hidden="true">03</span>
+
+        <div class="section-inner">
+            <div class="section-header">
+                <h2 class="section-title" data-i18n-html="projects.title">Mes <em>Réalisations</em></h2>
+            </div>
+
+            <div class="projects-private fade-in-item">
+                <p class="projects-private-text" data-i18n-html="projects.text">
+                    Vous souhaitez voir mes réalisations ?<br>
+                    Chaque projet est unique et confidentiel.<br>
+                    Écrivez-moi directement et je vous envoie<br>
+                    mes travaux en privé selon votre domaine.
+                </p>
+                <a href="#contact" class="cta-btn">
+                    <span data-i18n="projects.cta">Voir mes projets</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 04 — POURQUOI MOI
+         ============================================================ -->
+    <section id="why" class="section section-why fade-in-section">
+
+        <span class="section-label-vertical" aria-hidden="true" data-i18n="why.label">Pourquoi moi</span>
+        <span class="section-number-ghost" aria-hidden="true">04</span>
+
+        <div class="section-inner">
+            <div class="section-header">
+                <h2 class="section-title" data-i18n-html="why.title">Pourquoi <em>faydi.dev</em>&nbsp;?</h2>
+            </div>
+
+            <div class="why-grid">
+
+                <article class="why-card fade-in-item">
+                    <span class="why-number" aria-hidden="true">01</span>
+                    <h3 class="why-title" data-i18n="why.fast.title">Livraison rapide</h3>
+                    <p class="why-desc" data-i18n="why.fast.desc">Votre site en ligne en 7 à 14 jours. Garanti.</p>
+                </article>
+
+                <article class="why-card fade-in-item">
+                    <span class="why-number" aria-hidden="true">02</span>
+                    <h3 class="why-title" data-i18n="why.comm.title">Communication claire</h3>
+                    <p class="why-desc" data-i18n-html="why.comm.desc">Vous recevez une mise à jour à chaque étape.<br>Vous savez toujours où on en est.</p>
+                </article>
+
+                <article class="why-card fade-in-item">
+                    <span class="why-number" aria-hidden="true">03</span>
+                    <h3 class="why-title" data-i18n="why.design.title">Design sur mesure</h3>
+                    <p class="why-desc" data-i18n-html="why.design.desc">Un design unique créé pour vous.<br>Vos clients voient la différence.</p>
+                </article>
+
+                <article class="why-card fade-in-item">
+                    <span class="why-number" aria-hidden="true">04</span>
+                    <h3 class="why-title" data-i18n="why.support.title">Support après livraison</h3>
+                    <p class="why-desc" data-i18n-html="why.support.desc">Je reste disponible après la mise en ligne.<br>Vous n'êtes jamais seul.</p>
+                </article>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 05 — CONTACT
+
+         FORMULAIRE — powered by EmailJS
+         Voir script.js pour la configuration complète.
+         Site : https://www.emailjs.com/
+         ============================================================ -->
+    <section id="contact" class="section section-contact fade-in-section">
+
+        <span class="section-label-vertical" aria-hidden="true" data-i18n="contact.label">Contact</span>
+        <span class="section-number-ghost" aria-hidden="true">05</span>
+
+        <div class="section-inner">
+            <div class="section-header">
+                <h2 class="section-title" data-i18n-html="contact.title">Travaillons <em>ensemble</em></h2>
+            </div>
+
+            <div class="contact-layout">
+
+                <!-- Infos de contact -->
+                <div class="contact-info fade-in-item">
+                    <p class="contact-text" data-i18n="contact.text">
+                        Vous avez un projet en tête ? Décrivez-le moi et je vous reviens rapidement avec une proposition adaptée à vos besoins et à votre budget.
+                    </p>
+                    <div class="contact-details">
+                        <!-- Email encodé en entités HTML pour réduire la collecte par les bots -->
+                        <a href="mailto:faydi&#46;devpro&#64;gmail&#46;com" class="contact-detail-link">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                                <polyline points="22,6 12,13 2,6"/>
+                            </svg>
+                            faydi&#46;devpro&#64;gmail&#46;com
+                        </a>
+                        <a href="https://github.com/FAYDI-DEV" target="_blank" rel="noopener noreferrer" class="contact-detail-link">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                <path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/>
+                            </svg>
+                            GitHub
+                        </a>
+                        <a href="https://www.instagram.com/faydi_dev/" target="_blank" rel="noopener noreferrer" class="contact-detail-link">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/>
+                            </svg>
+                            Instagram
+                        </a>
+                        <a href="https://www.linkedin.com/in/faydi-alili-a55a902a4/" target="_blank" rel="noopener noreferrer" class="contact-detail-link">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                            </svg>
+                            LinkedIn
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Formulaire de contact -->
+                <form id="contact-form" class="contact-form fade-in-item" action="https://formspree.io/f/mgobdwll" method="POST" novalidate>
+                    <div class="form-group">
+                        <label for="name" data-i18n="form.name.label">Nom</label>
+                        <input type="text" id="name" name="name"
+                               placeholder="Votre nom complet" data-i18n-placeholder="form.name.placeholder"
+                               required autocomplete="name">
+                    </div>
+                    <div class="form-group">
+                        <label for="email" data-i18n="form.email.label">Email</label>
+                        <input type="email" id="email" name="email"
+                               placeholder="votre@email.com"
+                               required autocomplete="email">
+                    </div>
+                    <div class="form-group">
+                        <label for="message" data-i18n="form.message.label">Message</label>
+                        <textarea id="message" name="message"
+                                  placeholder="Décrivez votre projet, vos besoins, votre budget estimé..." data-i18n-placeholder="form.message.placeholder"
+                                  rows="5" required></textarea>
+                    </div>
+                    <!-- Honeypot anti-spam : ce champ doit rester vide — les bots le remplissent -->
+                    <div class="form-honeypot" aria-hidden="true">
+                        <label for="website" data-i18n="form.website.label">Site web</label>
+                        <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
+                    </div>
+
+                    <button type="submit" class="submit-btn">
+                        <span class="btn-text" data-i18n="form.submit">Envoyer le message</span>
+                        <span class="btn-icon" aria-hidden="true">→</span>
+                    </button>
+                    <!-- Message de statut (succès / erreur) -->
+                    <p id="form-status" class="form-status" role="status" aria-live="polite"></p>
+                </form>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Pied de page -->
+    <footer class="footer">
+        <p>&copy; <span id="footer-year">2026</span> faydi.dev - <span data-i18n="footer.rights">Tous droits réservés</span></p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

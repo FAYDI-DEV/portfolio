@@ -1,0 +1,1263 @@
+/* =============================================================
+   faydi.dev — Portfolio
+   style.css
+   ============================================================= */
+
+/* ========================
+   VARIABLES
+   ======================== */
+:root {
+    --bg:           #0e0e0e;
+    --bg-deep:      #0a0a0a;
+    --bg-card:      #141414;
+    --bg-card-hover:#1a1a1a;
+    --accent:       #ffffff;
+    --accent-60:    rgba(255, 255, 255, 0.6);
+    --accent-40:    rgba(255, 255, 255, 0.4);
+    --accent-20:    rgba(255, 255, 255, 0.2);
+    --accent-08:    rgba(255, 255, 255, 0.08);
+    --border:       rgba(255, 255, 255, 0.1);
+    --font-title:   'Playfair Display', Georgia, serif;
+    --font-body:    'Inter', system-ui, -apple-system, sans-serif;
+    --ease:         cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    --photo-width:  42%;   /* largeur de la colonne photo hero */
+}
+
+/* ========================
+   RESET
+   ======================== */
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    font-size: 16px;
+    overflow-x: hidden;
+}
+
+body {
+    background: var(--bg);
+    color: var(--accent);
+    font-family: var(--font-body);
+    font-weight: 300;
+    line-height: 1.7;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+img {
+    display: block;
+    max-width: 100%;
+}
+
+/* ========================
+   SCROLLBAR
+   ======================== */
+::-webkit-scrollbar { width: 3px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.15); border-radius: 2px; }
+
+/* ========================
+   SÉLECTION
+   ======================== */
+::selection {
+    background: rgba(255,255,255,0.15);
+    color: #fff;
+}
+
+/* =============================================================
+   NAVIGATION DOTS — barre verticale côté droit
+   ============================================================= */
+.nav-dots {
+    position: fixed;
+    right: 28px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 200;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    align-items: center;
+}
+
+.nav-dot {
+    display: block;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+    transition: all 0.35s var(--ease);
+    position: relative;
+}
+
+.nav-dot::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 18px;
+    height: 18px;
+    border: 1px solid transparent;
+    border-radius: 50%;
+    transition: border-color 0.35s var(--ease);
+}
+
+.nav-dot.active,
+.nav-dot:hover {
+    background: #ffffff;
+    transform: scale(1.4);
+}
+
+.nav-dot.active::after,
+.nav-dot:hover::after {
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+/* =============================================================
+   SECTIONS — base commune
+   ============================================================= */
+.section {
+    position: relative;
+    min-height: 100vh;
+    min-height: 100dvh; /* iOS Safari : évite le bug de la barre d'adresse */
+    width: 100%;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+}
+
+.section-inner {
+    width: 100%;
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 110px 80px 110px 120px;
+}
+
+/* Numéro fantôme */
+.section-number-ghost {
+    position: absolute;
+    font-family: var(--font-title);
+    font-size: clamp(120px, 18vw, 240px);
+    font-weight: 900;
+    color: rgba(255, 255, 255, 0.02);
+    line-height: 1;
+    right: 4%;
+    bottom: 4%;
+    user-select: none;
+    pointer-events: none;
+    letter-spacing: -0.05em;
+    z-index: 0;
+}
+
+/* Label vertical gauche */
+.section-label-vertical {
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%) rotate(-90deg);
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.2);
+    font-weight: 400;
+    white-space: nowrap;
+    user-select: none;
+}
+
+/* En-tête de section */
+.section-header {
+    margin-bottom: 64px;
+    position: relative;
+    z-index: 1;
+}
+
+.section-title {
+    font-family: var(--font-title);
+    font-size: clamp(36px, 4.5vw, 62px);
+    font-weight: 700;
+    line-height: 1.08;
+    letter-spacing: -0.025em;
+}
+
+.section-title em {
+    font-style: italic;
+    font-weight: 400;
+}
+
+/* ========================
+   ANIMATIONS AU SCROLL
+   ======================== */
+.fade-in-section {
+    opacity: 0;
+    transform: translateY(48px);
+    transition: opacity 0.9s var(--ease), transform 0.9s var(--ease);
+}
+
+.fade-in-section.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.fade-in-item {
+    opacity: 0;
+    transform: translateY(32px);
+    transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
+}
+
+.fade-in-item.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Décalage en cascade pour les items dans une grille */
+.fade-in-item:nth-child(1) { transition-delay: 0.05s; }
+.fade-in-item:nth-child(2) { transition-delay: 0.15s; }
+.fade-in-item:nth-child(3) { transition-delay: 0.25s; }
+.fade-in-item:nth-child(4) { transition-delay: 0.35s; }
+
+/* =============================================================
+   SECTION HERO
+   ============================================================= */
+.section-hero {
+    min-height: 100vh;
+    min-height: 100dvh;
+    background: var(--bg);
+    flex-direction: column;
+    justify-content: center;
+    padding: 0;
+}
+
+/* En-tête fixe */
+.hero-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px 44px;
+    transition: background 0.4s ease, backdrop-filter 0.4s ease;
+    background: linear-gradient(to bottom, rgba(14,14,14,0.95) 0%, transparent 100%);
+}
+
+.hero-header.scrolled {
+    background: rgba(14, 14, 14, 0.96);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+}
+
+.site-logo {
+    font-family: var(--font-body);
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.25em;
+    text-transform: lowercase;
+    color: #ffffff;
+}
+
+.social-links {
+    display: flex;
+    gap: 22px;
+    align-items: center;
+}
+
+.social-link {
+    color: rgba(255, 255, 255, 0.45);
+    display: flex;
+    align-items: center;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.social-link:hover {
+    color: #ffffff;
+    transform: translateY(-3px);
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+}
+
+.lang-switch {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    border-left: 1px solid rgba(255, 255, 255, 0.18);
+    padding-left: 20px;
+}
+
+.lang-sep {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.25);
+}
+
+.lang-btn {
+    font-family: var(--font-body);
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: rgba(255, 255, 255, 0.45);
+    padding: 0;
+    transition: color 0.3s ease;
+}
+
+.lang-btn:hover {
+    color: #ffffff;
+}
+
+.lang-btn.active {
+    color: #ffffff;
+}
+
+/* Contenu texte du hero (gauche) */
+.hero-content {
+    will-change: opacity, transform;
+    position: relative;
+    z-index: 10;
+    padding: 0 calc(var(--photo-width) + 40px) 0 120px;
+    margin-top: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+.hero-title {
+    font-family: var(--font-title);
+    font-size: clamp(70px, 11vw, 140px);
+    font-weight: 900;
+    line-height: 0.88;
+    letter-spacing: -0.045em;
+    margin-bottom: 36px;
+    color: #ffffff;
+}
+
+.hero-subtitle {
+    font-size: clamp(15px, 1.6vw, 19px);
+    font-weight: 300;
+    color: rgba(255, 255, 255, 0.58);
+    line-height: 1.7;
+    max-width: 430px;
+    margin-bottom: 52px;
+}
+
+.hero-subtitle .accent {
+    color: #ffffff;
+    font-weight: 500;
+}
+
+/* Bouton CTA */
+.cta-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    padding: 17px 38px;
+    border: 1px solid rgba(255, 255, 255, 0.28);
+    font-family: var(--font-body);
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    font-weight: 500;
+    color: #ffffff;
+    transition: all 0.4s var(--ease);
+    position: relative;
+    overflow: hidden;
+    width: fit-content;
+}
+
+.cta-btn span {
+    position: relative;
+    z-index: 1;
+}
+
+.cta-btn::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: #ffffff;
+    transform: translateX(-101%);
+    transition: transform 0.45s var(--ease);
+}
+
+.cta-btn:hover {
+    color: #0e0e0e;
+    border-color: #ffffff;
+}
+
+.cta-btn:hover::before {
+    transform: translateX(0);
+}
+
+/* =============================================================
+   PHOTO HERO — côté droit, pleine hauteur
+
+   REMPLACER PHOTO :
+   Option A — CSS background-image :
+     1. Commentez/supprimez le .photo-placeholder
+     2. Dans .hero-photo, ajoutez :
+        background-image: url('votre-photo.jpg');
+        background-size: cover;
+        background-position: top center;
+
+   Option B — balise <img> :
+     1. Commentez/supprimez le .photo-placeholder
+     2. Décommentez la balise <img> dans index.html
+   ============================================================= */
+.hero-photo {
+    position: fixed;
+    right: 0;
+    top: 0;
+    height: 100vh;
+    width: var(--photo-width);
+    z-index: 5;
+    overflow: hidden;
+}
+
+/* L'image réelle (si vous utilisez une balise <img>) */
+.hero-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+    filter: grayscale(100%);
+    display: block;
+}
+
+/* Placeholder tant qu'il n'y a pas de photo */
+.photo-placeholder {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(160deg, #181818 0%, #242424 50%, #161616 100%);
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding-bottom: 56px;
+}
+
+.photo-placeholder-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+}
+
+.photo-placeholder-label {
+    color: rgba(255, 255, 255, 0.15);
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+}
+
+.photo-placeholder-hint {
+    color: rgba(255, 255, 255, 0.08);
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+}
+
+/* Dégradé fondu : gauche → transparent + bas → noir */
+.hero-photo-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 10;
+    pointer-events: none;
+    background:
+        linear-gradient(to right,  var(--bg) 0%, rgba(14,14,14,0.6) 28%, transparent 55%),
+        linear-gradient(to top,    var(--bg) 0%, transparent 28%);
+}
+
+/* Repositionnement du numéro fantôme sur le hero */
+.section-hero .section-number-ghost {
+    right: calc(var(--photo-width) + 2%);
+    bottom: 8%;
+    z-index: 3;
+}
+
+/* =============================================================
+   SECTION SERVICES
+   ============================================================= */
+.section-services,
+.section-projects,
+.section-why,
+.section-contact {
+    z-index: 6; /* Au-dessus de .hero-photo (z-index: 5) qui est fixed */
+}
+
+.section-services {
+    background: var(--bg);
+}
+
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    position: relative;
+    z-index: 1;
+}
+
+/* Bento asymmetrique : grand carre + colonne haute + deux cases basses */
+@media (min-width: 1101px) {
+    .services-grid {
+        grid-template-columns: 1.3fr 1fr 1fr;
+        grid-template-rows: repeat(2, auto);
+        grid-template-areas:
+            "a a b"
+            "c d b";
+    }
+
+    .service-card:nth-child(1) { grid-area: a; display: flex; flex-direction: column; justify-content: center; }
+    .service-card:nth-child(2) { grid-area: c; }
+    .service-card:nth-child(3) { grid-area: d; }
+    .service-card:nth-child(4) { grid-area: b; display: flex; flex-direction: column; justify-content: center; }
+}
+
+.service-card {
+    padding: 40px 36px;
+    border: 1px solid var(--border);
+    background: var(--bg-card);
+    transition: background 0.4s var(--ease), border-color 0.4s var(--ease), transform 0.4s var(--ease);
+    position: relative;
+    overflow: hidden;
+    cursor: default;
+}
+
+/* Trait animé sur la gauche au hover */
+.service-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 2px;
+    height: 0;
+    background: #ffffff;
+    transition: height 0.45s var(--ease);
+}
+
+.service-card:hover {
+    background: var(--bg-card-hover);
+    border-color: rgba(255, 255, 255, 0.18);
+    transform: translateY(-5px);
+}
+
+.service-card:hover::before {
+    height: 100%;
+}
+
+.service-icon {
+    margin-bottom: 28px;
+    color: rgba(255, 255, 255, 0.55);
+    transition: color 0.3s ease;
+}
+
+.service-card:hover .service-icon {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.service-title {
+    font-family: var(--font-title);
+    font-size: 21px;
+    font-weight: 600;
+    margin-bottom: 14px;
+    letter-spacing: -0.02em;
+}
+
+.service-desc {
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.58);
+    line-height: 1.75;
+    font-weight: 300;
+}
+
+/* =============================================================
+   SECTION PROJETS
+   ============================================================= */
+.section-projects {
+    background: var(--bg-deep);
+}
+
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    position: relative;
+    z-index: 1;
+}
+
+.project-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    overflow: hidden;
+    transition: transform 0.45s var(--ease), border-color 0.4s var(--ease), box-shadow 0.4s var(--ease);
+}
+
+.project-card:hover {
+    transform: translateY(-7px);
+    border-color: rgba(255, 255, 255, 0.18);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+}
+
+/* Zone image */
+.project-img {
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+    background: #1a1a1a;
+}
+
+/* Placeholder image (avant capture d'écran réelle) */
+.project-img-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-title);
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    color: rgba(255, 255, 255, 0.06);
+    background: linear-gradient(145deg, #151515, #1e1e1e);
+    transition: color 0.4s ease;
+}
+
+.project-card:hover .project-img-placeholder {
+    color: rgba(255, 255, 255, 0.1);
+}
+
+/* Image réelle au survol */
+.project-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.65s var(--ease), filter 0.65s var(--ease);
+    filter: grayscale(20%);
+}
+
+.project-card:hover .project-img img {
+    transform: scale(1.06);
+    filter: grayscale(0%);
+}
+
+/* Infos du projet */
+.project-info {
+    padding: 26px 24px 28px;
+}
+
+.project-type {
+    display: inline-block;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.3);
+    margin-bottom: 8px;
+    font-weight: 400;
+}
+
+.project-name {
+    font-family: var(--font-title);
+    font-size: 19px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    letter-spacing: -0.015em;
+}
+
+.project-desc {
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.4);
+    line-height: 1.65;
+    margin-bottom: 22px;
+    font-weight: 300;
+}
+
+.project-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.5);
+    font-weight: 500;
+    padding-bottom: 3px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+    transition: color 0.3s ease, border-color 0.3s ease;
+}
+
+.project-link span {
+    transition: transform 0.3s ease;
+}
+
+.project-link:hover {
+    color: #ffffff;
+    border-color: rgba(255, 255, 255, 0.45);
+}
+
+.project-link:hover span {
+    transform: translateX(5px);
+}
+
+/* =============================================================
+   SECTION PROJETS — bloc confidentiel
+   ============================================================= */
+.projects-private {
+    position: relative;
+    z-index: 1;
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 72px 56px;
+    border: 1px solid var(--border);
+    background: var(--bg-card);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 44px;
+}
+
+.projects-private-text {
+    font-family: var(--font-title);
+    font-size: clamp(18px, 2vw, 22px);
+    font-style: italic;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.55);
+    line-height: 1.9;
+}
+
+/* =============================================================
+   SECTION POURQUOI MOI
+   ============================================================= */
+.section-why {
+    background: var(--bg);
+}
+
+.why-grid {
+    display: flex;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    position: relative;
+    z-index: 1;
+}
+
+.why-card {
+    flex: 1 1 0;
+    padding: 44px 32px 8px;
+    border-right: 1px solid var(--border);
+    transition: background 0.35s ease;
+}
+
+.why-card:last-child {
+    border-right: none;
+}
+
+.why-card:hover {
+    background: rgba(255, 255, 255, 0.02);
+}
+
+.why-number {
+    display: block;
+    font-family: var(--font-title);
+    font-size: 34px;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.18);
+    margin-bottom: 22px;
+    letter-spacing: -0.02em;
+}
+
+.why-title {
+    font-family: var(--font-title);
+    font-size: 21px;
+    font-weight: 600;
+    margin-bottom: 14px;
+    letter-spacing: -0.02em;
+}
+
+.why-desc {
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.58);
+    line-height: 1.75;
+    font-weight: 300;
+}
+
+/* =============================================================
+   SECTION CONTACT
+   ============================================================= */
+.section-contact {
+    background: var(--bg-deep);
+}
+
+.contact-layout {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 88px;
+    align-items: start;
+    position: relative;
+    z-index: 1;
+}
+
+.contact-text {
+    font-size: 15px;
+    color: rgba(255, 255, 255, 0.5);
+    line-height: 1.85;
+    margin-bottom: 44px;
+    font-weight: 300;
+}
+
+.contact-details {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.contact-detail-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 13px;
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.6);
+    transition: color 0.3s ease;
+    font-weight: 400;
+}
+
+.contact-detail-link:hover {
+    color: #ffffff;
+}
+
+.contact-detail-link svg {
+    flex-shrink: 0;
+    opacity: 0.7;
+    transition: opacity 0.3s ease;
+}
+
+.contact-detail-link:hover svg {
+    opacity: 1;
+}
+
+/* Formulaire */
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+}
+
+.form-group label {
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.6);
+    font-weight: 400;
+}
+
+.form-group input,
+.form-group textarea {
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+    padding: 13px 0;
+    color: #ffffff;
+    font-family: var(--font-body);
+    font-size: 15px;
+    font-weight: 300;
+    outline: none;
+    transition: border-color 0.35s ease;
+    resize: none;
+    width: 100%;
+    -webkit-appearance: none;
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+    color: rgba(255, 255, 255, 0.4);
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    border-color: rgba(255, 255, 255, 0.45);
+}
+
+.submit-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    padding: 19px 44px;
+    background: transparent;
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.28);
+    cursor: pointer;
+    font-family: var(--font-body);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    transition: all 0.4s var(--ease);
+    width: 100%;
+    margin-top: 4px;
+    position: relative;
+    overflow: hidden;
+}
+
+.submit-btn .btn-text {
+    position: relative;
+    z-index: 1;
+}
+
+.submit-btn::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: #ffffff;
+    transform: translateX(-101%);
+    transition: transform 0.45s var(--ease);
+}
+
+.submit-btn:hover {
+    color: #0e0e0e;
+    border-color: #ffffff;
+}
+
+.submit-btn:hover::before {
+    transform: translateX(0);
+}
+
+.submit-btn:disabled {
+    opacity: 0.65;
+    cursor: not-allowed;
+}
+
+.btn-icon {
+    display: inline-block;
+    position: relative;
+    z-index: 1;
+    transition: transform 0.3s ease;
+}
+
+.submit-btn:hover .btn-icon {
+    transform: translateX(5px);
+}
+
+/* Honeypot anti-spam : masqué visuellement mais accessible aux bots */
+.form-honeypot {
+    position: absolute;
+    left: -9999px;
+    top: auto;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.form-status {
+    font-size: 13px;
+    text-align: center;
+    min-height: 20px;
+    font-weight: 400;
+    letter-spacing: 0.02em;
+    transition: opacity 0.4s ease;
+}
+
+.form-status.success { color: #6ee7b7; }
+.form-status.error   { color: #fca5a5; }
+
+/* =============================================================
+   FOOTER
+   ============================================================= */
+.footer {
+    padding: 30px 120px;
+    border-top: 1px solid var(--border);
+    text-align: center;
+    background: var(--bg-deep);
+    position: relative;
+    z-index: 6;
+}
+
+.footer p {
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.18);
+    letter-spacing: 0.12em;
+}
+
+/* =============================================================
+   RESPONSIVE — Tablette (≤ 1100px)
+   ============================================================= */
+@media (max-width: 1100px) {
+    :root { --photo-width: 38%; }
+
+    .section-inner {
+        padding: 90px 60px 90px 80px;
+    }
+
+    .hero-content {
+        padding: 0 calc(var(--photo-width) + 30px) 0 80px;
+    }
+
+    .projects-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .contact-layout {
+        gap: 56px;
+    }
+}
+
+/* =============================================================
+   RESPONSIVE — Mobile (≤ 768px)
+   ============================================================= */
+@media (max-width: 768px) {
+
+    /* === NAVIGATION LATÉRALE === */
+    .nav-dots,
+    .section-label-vertical {
+        display: none;
+    }
+
+    /* === HEADER === */
+    .hero-header {
+        padding: 16px 20px;
+    }
+
+    .site-logo {
+        font-size: 14px;
+    }
+
+    .social-link svg {
+        width: 20px;
+        height: 20px;
+    }
+
+    .header-right {
+        gap: 14px;
+    }
+
+    .lang-switch {
+        padding-left: 12px;
+        gap: 2px;
+    }
+
+    .lang-btn {
+        font-size: 11px;
+    }
+
+    /* === HERO : photo pleine largeur en haut, texte en dessous === */
+    .section-hero {
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: stretch;
+        min-height: unset;
+    }
+
+    .hero-photo {
+        position: relative;
+        top: auto;
+        right: auto;
+        width: 100%;
+        height: 110vw;
+        max-height: 110vw;
+        order: -1;
+        margin-top: 60px;
+        filter: none;
+        z-index: auto;
+    }
+
+    .hero-photo img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: top center;
+        filter: grayscale(100%);
+    }
+
+    .hero-photo-overlay {
+        background: linear-gradient(
+            to bottom,
+            transparent 70%,
+            #0e0e0e 100%
+        );
+    }
+
+    .hero-content {
+        width: 100%;
+        padding: 16px 20px 40px;
+        max-width: 100%;
+        min-height: unset;
+        justify-content: flex-start;
+        order: 1;
+        text-align: left;
+    }
+
+    .hero-title {
+        font-size: 52px;
+        line-height: 1;
+    }
+
+    .hero-subtitle {
+        font-size: 14px;
+        line-height: 1.7;
+        max-width: 100%;
+    }
+
+    .section-hero .section-number-ghost {
+        font-size: 60px;
+        right: 8px;
+        bottom: 8px;
+    }
+
+    .cta-btn {
+        min-height: 48px;
+    }
+
+    /* === SECTIONS === */
+    .section-inner {
+        padding: 80px 20px;
+    }
+
+    .section-number-ghost {
+        font-size: 60px;
+        right: 8px;
+        bottom: 8px;
+    }
+
+    /* === SERVICES === */
+    .services-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .service-card {
+        padding: 24px;
+    }
+
+    /* === PROJETS === */
+    .projects-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .projects-private {
+        padding: 30px 20px;
+    }
+
+    .projects-private .cta-btn {
+        width: 100%;
+        justify-content: center;
+    }
+
+    /* === POURQUOI MOI === */
+    .why-grid {
+        flex-direction: column;
+        border-bottom: none;
+    }
+
+    .why-card {
+        padding: 28px 0;
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+    }
+
+    .why-card:last-child {
+        border-bottom: none;
+    }
+
+    .why-title {
+        font-size: 22px;
+    }
+
+    /* === CONTACT === */
+    .section-contact .section-inner {
+        padding: 60px 20px;
+    }
+
+    .contact-layout {
+        grid-template-columns: 1fr;
+        gap: 52px;
+    }
+
+    .form-group input,
+    .form-group textarea {
+        font-size: 16px;
+        width: 100%;
+    }
+
+    .submit-btn {
+        width: 100%;
+        min-height: 48px;
+    }
+
+    /* === FOOTER === */
+    .footer {
+        text-align: center;
+        padding: 20px;
+    }
+
+    .footer p {
+        font-size: 12px;
+    }
+
+    /* === ANIMATIONS === */
+    .fade-in-item:nth-child(n) {
+        transition-delay: 0.05s;
+    }
+}
+
+/* =============================================================
+   RESPONSIVE — Petit mobile (≤ 480px)
+   ============================================================= */
+@media (max-width: 480px) {
+    .hero-title {
+        font-size: clamp(52px, 16vw, 78px);
+    }
+
+    .section-title {
+        font-size: clamp(30px, 9vw, 44px);
+    }
+
+    .services-grid {
+        gap: 16px;
+    }
+
+    .service-card {
+        padding: 28px 24px;
+    }
+
+    .submit-btn {
+        padding: 17px 32px;
+    }
+}
+
+/* =============================================================
+   RESPONSIVE — Très petit mobile (≤ 380px)
+   ============================================================= */
+@media (max-width: 380px) {
+    .hero-title {
+        font-size: 42px;
+    }
+
+    .hero-subtitle {
+        font-size: 13px;
+    }
+
+    .section-inner {
+        padding: 60px 16px;
+    }
+}
