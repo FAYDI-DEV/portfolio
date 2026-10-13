@@ -27,6 +27,7 @@
          ============================================================ -->
     <nav class="nav-dots" id="nav-dots" aria-label="Navigation sections">
         <a href="#hero"     class="nav-dot active" data-section="hero"     title="Accueil"     data-i18n-title="nav.hero"></a>
+        <a href="#showreel" class="nav-dot"        data-section="showreel" title="Showreel"     data-i18n-title="nav.showreel"></a>
         <a href="#services" class="nav-dot"        data-section="services" title="Services"     data-i18n-title="nav.services"></a>
         <a href="#projects" class="nav-dot"        data-section="projects" title="Projets"      data-i18n-title="nav.projects"></a>
         <a href="#why"      class="nav-dot"        data-section="why"      title="Pourquoi moi" data-i18n-title="nav.why"></a>
@@ -112,12 +113,68 @@
     </section>
 
     <!-- ============================================================
-         SECTION 02 — SERVICES
+         SECTION 02 — SHOWREEL
+
+         Vidéo chargée en différé par script.js (initShowreel) :
+         - verticale (9:16) sous 700px, horizontale (16:9) au-delà
+         - pause hors écran, reprise au retour
+         - prefers-reduced-motion : pas d'autoplay, poster + bouton lecture
+         ============================================================ -->
+    <section id="showreel" class="section section-showreel fade-in-section">
+
+        <span class="section-label-vertical" aria-hidden="true" data-i18n="showreel.label">Showreel</span>
+        <span class="section-number-ghost" aria-hidden="true">02</span>
+
+        <div class="section-inner">
+            <div class="section-header">
+                <h2 class="section-title" data-i18n="showreel.title">Showreel</h2>
+                <p class="showreel-subtitle" data-i18n="showreel.subtitle">30 secondes pour voir ce que je construis</p>
+            </div>
+
+            <div class="showreel-player">
+                <video class="showreel-video" muted loop playsinline preload="none"
+                       poster="video/showreel-poster-16x9.jpg"></video>
+
+                <!-- Lecture / pause (toute la surface de la vidéo) -->
+                <button type="button" class="showreel-play"
+                        aria-label="Lire la vidéo" data-i18n-aria-label="showreel.play">
+                    <span class="showreel-play-icon" aria-hidden="true">
+                        <svg class="icon-play" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+                            <polygon points="7 4 20 12 7 20 7 4"/>
+                        </svg>
+                        <svg class="icon-pause" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+                            <rect x="6" y="4" width="4" height="16"/>
+                            <rect x="14" y="4" width="4" height="16"/>
+                        </svg>
+                    </span>
+                </button>
+
+                <!-- Son : active + relance du début / coupe -->
+                <button type="button" class="showreel-sound"
+                        aria-label="Activer le son et relancer la vidéo" data-i18n-aria-label="showreel.sound.on">
+                    <svg class="icon-muted" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
+                        <line x1="23" y1="9" x2="17" y2="15"/>
+                        <line x1="17" y1="9" x2="23" y2="15"/>
+                    </svg>
+                    <svg class="icon-unmuted" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
+                        <path d="M15.54 8.46a5 5 0 0 1 0 7.07"/>
+                        <path d="M19.07 4.93a10 10 0 0 1 0 14.14"/>
+                    </svg>
+                    <span data-i18n="showreel.sound">Son</span>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 03 — SERVICES
          ============================================================ -->
     <section id="services" class="section section-services fade-in-section">
 
         <span class="section-label-vertical" aria-hidden="true" data-i18n="services.label">Services</span>
-        <span class="section-number-ghost" aria-hidden="true">02</span>
+        <span class="section-number-ghost" aria-hidden="true">03</span>
 
         <div class="section-inner">
             <div class="section-header">
@@ -178,7 +235,7 @@
     </section>
 
     <!-- ============================================================
-         SECTION 03 — PROJETS
+         SECTION 04 — PROJETS
 
          POUR REMPLACER UN PROJET :
          1. Remplacez "Nom du projet XX" par le vrai nom
@@ -190,7 +247,7 @@
     <section id="projects" class="section section-projects fade-in-section">
 
         <span class="section-label-vertical" aria-hidden="true" data-i18n="projects.label">Projets</span>
-        <span class="section-number-ghost" aria-hidden="true">03</span>
+        <span class="section-number-ghost" aria-hidden="true">04</span>
 
         <div class="section-inner">
             <div class="section-header">
@@ -212,12 +269,12 @@
     </section>
 
     <!-- ============================================================
-         SECTION 04 — POURQUOI MOI
+         SECTION 05 — POURQUOI MOI
          ============================================================ -->
     <section id="why" class="section section-why fade-in-section">
 
         <span class="section-label-vertical" aria-hidden="true" data-i18n="why.label">Pourquoi moi</span>
-        <span class="section-number-ghost" aria-hidden="true">04</span>
+        <span class="section-number-ghost" aria-hidden="true">05</span>
 
         <div class="section-inner">
             <div class="section-header">
@@ -255,7 +312,7 @@
     </section>
 
     <!-- ============================================================
-         SECTION 05 — CONTACT
+         SECTION 06 — CONTACT
 
          FORMULAIRE — powered by EmailJS
          Voir script.js pour la configuration complète.
@@ -264,7 +321,7 @@
     <section id="contact" class="section section-contact fade-in-section">
 
         <span class="section-label-vertical" aria-hidden="true" data-i18n="contact.label">Contact</span>
-        <span class="section-number-ghost" aria-hidden="true">05</span>
+        <span class="section-number-ghost" aria-hidden="true">06</span>
 
         <div class="section-inner">
             <div class="section-header">

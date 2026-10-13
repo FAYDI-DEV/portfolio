@@ -190,6 +190,7 @@ function initFooterYear() {
 const translations = {
     fr: {
         'nav.hero': 'Accueil',
+        'nav.showreel': 'Showreel',
         'nav.services': 'Services',
         'nav.projects': 'Projets',
         'nav.why': 'Pourquoi moi',
@@ -199,6 +200,15 @@ const translations = {
         'hero.title': 'Bonjour',
         'hero.subtitle': 'Vous avez une idée,<br>\n                je la transforme en site<br>\n                qui travaille pour vous <span class="accent">24h/24</span>',
         'hero.cta': 'Démarrons votre projet',
+
+        'showreel.label': 'Showreel',
+        'showreel.title': 'Showreel',
+        'showreel.subtitle': '30 secondes pour voir ce que je construis',
+        'showreel.sound': 'Son',
+        'showreel.sound.on': 'Activer le son et relancer la vidéo',
+        'showreel.sound.off': 'Couper le son de la vidéo',
+        'showreel.play': 'Lire la vidéo',
+        'showreel.pause': 'Mettre la vidéo en pause',
 
         'services.label': 'Services',
         'services.title': 'Mes <em>Services</em>',
@@ -243,6 +253,7 @@ const translations = {
     },
     en: {
         'nav.hero': 'Home',
+        'nav.showreel': 'Showreel',
         'nav.services': 'Services',
         'nav.projects': 'Projects',
         'nav.why': 'Why me',
@@ -252,6 +263,15 @@ const translations = {
         'hero.title': 'Hello',
         'hero.subtitle': 'You have an idea,<br>\n                I turn it into a website<br>\n                that works for you <span class="accent">24/7</span>',
         'hero.cta': "Let's start your project",
+
+        'showreel.label': 'Showreel',
+        'showreel.title': 'Showreel',
+        'showreel.subtitle': '30 seconds of what I build',
+        'showreel.sound': 'Sound',
+        'showreel.sound.on': 'Turn sound on and restart the video',
+        'showreel.sound.off': 'Mute the video',
+        'showreel.play': 'Play the video',
+        'showreel.pause': 'Pause the video',
 
         'services.label': 'Services',
         'services.title': 'My <em>Services</em>',
@@ -322,6 +342,11 @@ function applyLanguage(lang) {
         if (dict[key] !== undefined) el.setAttribute('title', dict[key]);
     });
 
+    document.querySelectorAll('[data-i18n-aria-label]').forEach(el => {
+        const key = el.getAttribute('data-i18n-aria-label');
+        if (dict[key] !== undefined) el.setAttribute('aria-label', dict[key]);
+    });
+
     document.querySelectorAll('.lang-btn').forEach(btn => {
         btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
     });
@@ -342,6 +367,126 @@ function initLanguageSwitch() {
 }
 
 /* ====================================================
+   SHOWREEL — vidéo différée, pause hors écran, bouton son
+   ==================================================== */
+function initShowreel() {
+    const player = document.querySelector('.showreel-player');
+    if (!player) return;
+
+    const video    = player.querySelector('.showreel-video');
+    const playBtn  = player.querySelector('.showreel-play');
+    const soundBtn = player.querySelector('.showreel-sound');
+
+    /* Même seuil que le @media (max-width: 699px) de style.css */
+    const mobileQuery  = window.matchMedia('(max-width: 699px)');
+    const reducedQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+    const sources = {
+        mobile:  { src: 'video/showreel-9x16.mp4', poster: 'video/showreel-poster-9x16.jpg' },
+        desktop: { src: 'video/showreel-16x9.mp4', poster: 'video/showreel-poster-16x9.jpg' },
+    };
+    const current = () => (mobileQuery.matches ? sources.mobile : sources.desktop);
+
+    let isLoaded  = false;
+    let isVisible = false;
+    /* Autoplay géré ici (et non via l'attribut) pour respecter le chargement
+       différé ; avec prefers-reduced-motion, on attend un clic. */
+    let wantsPlay = !reducedQuery.matches;
+
+    const translate = (key) => (translations[document.documentElement.lang] || translations.fr)[key];
+
+    const setLabel = (el, key) => {
+        el.setAttribute('data-i18n-aria-label', key);
+        el.setAttribute('aria-label', translate(key));
+    };
+
+    const updateUI = () => {
+        player.classList.toggle('is-playing', wantsPlay);
+        setLabel(playBtn, wantsPlay ? 'showreel.pause' : 'showreel.play');
+
+        const soundOn = !video.muted;
+        soundBtn.classList.toggle('is-on', soundOn);
+        setLabel(soundBtn, soundOn ? 'showreel.sound.off' : 'showreel.sound.on');
+    };
+
+    const load = () => {
+        if (isLoaded) return;
+        video.src = current().src;
+        isLoaded  = true;
+    };
+
+    /* Joue seulement si l'utilisateur le veut ET si la vidéo est à l'écran */
+    const sync = () => {
+        if (wantsPlay && isVisible) {
+            load();
+            video.play().catch(err => {
+                /* Lecture bloquée par le navigateur : on revient au bouton lecture */
+                if (err.name === 'NotAllowedError') {
+                    wantsPlay = false;
+                    updateUI();
+                }
+            });
+        } else if (!video.paused) {
+            video.pause();
+        }
+    };
+
+    video.muted  = true;
+    video.poster = current().poster;
+
+    /* Précharge la vidéo un peu avant qu'elle n'arrive à l'écran */
+    const loadObserver = new IntersectionObserver(
+        (entries) => {
+            if (!entries.some(entry => entry.isIntersecting)) return;
+            if (wantsPlay) load();
+            loadObserver.disconnect();
+        },
+        { rootMargin: '300px 0px' }
+    );
+
+    /* Pause quand elle sort de l'écran, reprise quand elle revient */
+    const playObserver = new IntersectionObserver(
+        ([entry]) => {
+            isVisible = entry.isIntersecting;
+            sync();
+        },
+        { threshold: 0.25 }
+    );
+
+    loadObserver.observe(player);
+    playObserver.observe(player);
+
+    playBtn.addEventListener('click', () => {
+        wantsPlay = !wantsPlay;
+        updateUI();
+        sync();
+    });
+
+    soundBtn.addEventListener('click', () => {
+        if (video.muted) {
+            video.muted       = false;
+            video.currentTime = 0;
+            wantsPlay         = true;
+        } else {
+            video.muted = true;
+        }
+        updateUI();
+        sync();
+    });
+
+    /* Rotation / redimensionnement : bascule 9:16 <-> 16:9 */
+    mobileQuery.addEventListener('change', () => {
+        video.poster = current().poster;
+        if (isLoaded) {
+            video.src = current().src;
+            sync();
+        }
+    });
+
+    updateUI();
+}
+
+/* ====================================================
    INIT
    ==================================================== */
 document.addEventListener('DOMContentLoaded', () => {
@@ -352,6 +497,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initHeroParallax();
     initFooterYear();
     initImageProtection();
+    initShowreel();
     initLanguageSwitch();
 
     /* Lancer la détection de section active dès le chargement */
